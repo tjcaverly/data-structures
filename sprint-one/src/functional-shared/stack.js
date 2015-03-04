@@ -4,8 +4,6 @@ var Stack = function() {
   var someInstance = {count:0, storage:{}};
 
   _.extend(someInstance, stackMethods);
-  console.log(someInstance);
-
   return someInstance;
 };
 
@@ -23,7 +21,6 @@ var stackMethods = {
 		}
 	},
 	size: function() {
-		console.log("this ", this, "size" + this.count);
 		return this.count;
 	}
 };
