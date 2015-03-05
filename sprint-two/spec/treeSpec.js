@@ -63,4 +63,15 @@ describe('tree', function() {
     tree.removeFromParent();
   })
 
+  it('should traverse the tree and execute callback on each node', function() {
+    tree.addChild(5);
+    tree.children[0].addChild(6);
+    tree.children[0].addChild(7);
+    tree.addChild(8);
+    tree.children[1].addChild(9);
+    var count=0;
+    tree.traverse(function(){count++;});
+    expect(count).to.equal(6);
+  })
+
 });

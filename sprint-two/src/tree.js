@@ -2,9 +2,7 @@ var Tree = function(value){
   var newTree = {};
   newTree.value = value;
   newTree.parent = null;
-
-  // your code here
-  newTree.children = [];  // fix me
+  newTree.children = [];
 
   _.extend(newTree, treeMethods);
 
@@ -40,7 +38,17 @@ treeMethods.removeFromParent = function(){
 	this.parent.children.pop(_.indexOf(this.parent.children, this));
 	this.parent = null;
 	}
-}
+};
+
+treeMethods.traverse = function(cb) {
+	var nodeTraverse = function(node) {
+		if (node !== null) {
+			cb(node.value);
+			_.each(node.children, nodeTraverse);
+		}
+	};
+	nodeTraverse(this);
+};
 
 
 /*
