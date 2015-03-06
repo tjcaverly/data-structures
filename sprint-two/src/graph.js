@@ -17,15 +17,13 @@ Graph.prototype.contains = function(node){
 Graph.prototype.removeNode = function(node){
 	if (this.contains(node)){
 		var index = _.indexOf(this.nodes, node);
-		this.nodes.pop(index);
+		this.nodes.splice(index, 1);
 		for (var i=0; i<this.edges.length; i++) {
 			if (this.edges[i] === node) {
 				if (i%2===0) {
-					this.edges.pop(i);
-					this.edges.pop(i);
+					this.edges.splice(i, 2);
 				} else {
-					this.edges.pop(i-1);
-					this.edges.pop(i-1);
+					this.edges.splice(i-1, 2);
 				}
 				i-=2;
 			}
@@ -52,8 +50,7 @@ Graph.prototype.removeEdge = function(fromNode, toNode){
 	for (var i = 0; i<this.edges.length; i+=2){
 		if ( (this.edges[i] === fromNode && this.edges[i+1] === toNode) || 
 					(this.edges[i+1] === fromNode && this.edges[i] === toNode) ){
-			this.edges.pop(i);
-			this.edges.pop(i);
+			this.edges.splice(i, 2);
 		}
 	}
 };

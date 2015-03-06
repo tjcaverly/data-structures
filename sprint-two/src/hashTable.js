@@ -41,7 +41,7 @@ HashTable.prototype.remove = function(k){
   }
   for (var j=0; j<retrieved.length; j++) {
   	if (retrieved[j][0]===k) {
-  		retrieved.pop(j);
+      retrieved.splice(j, 1);
       this._filled--;
   	}
   }

@@ -22,9 +22,14 @@ describe('graph', function() {
 
   it('should remove nodes that were inserted', function() {
     graph.addNode('puppies');
+    graph.addNode('kittens');
+    graph.addNode('penguins');
     expect(graph.contains('puppies')).to.equal(true);
+    graph.removeNode('kittens');
     graph.removeNode('puppies');
+    expect(graph.contains('kittens')).to.equal(false);
     expect(graph.contains('puppies')).to.equal(false);
+    expect(graph.contains('penguins')).to.equal(true);
   });
 
   it('should create edges between two nodes', function() {
@@ -39,8 +44,14 @@ describe('graph', function() {
   it('should remove edges between nodes', function() {
     graph.addNode('apples');
     graph.addNode('satsumas');
+    graph.addNode('pears');
     graph.addEdge('satsumas', 'apples');
-    expect(graph.hasEdge('apples', 'satsumas')).to.equal(true);
+
+    graph.addEdge('apples', 'pears');
+
+    graph.removeEdge('satsumas', 'apples');
+
+    expect(graph.hasEdge('satsumas', 'apples')).to.equal(false);
   });
 
   it('should execute a callback on each node in the graph', function() {

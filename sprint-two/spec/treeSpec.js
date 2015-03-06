@@ -61,7 +61,7 @@ describe('tree', function() {
 
   it('should have removeFromParent not error if parent is already null', function() {
     tree.removeFromParent();
-  })
+  });
 
   it('should traverse the tree and execute callback on each node', function() {
     tree.addChild(5);
@@ -72,6 +72,6 @@ describe('tree', function() {
     var count=0;
     tree.traverse(function(){count++;});
     expect(count).to.equal(6);
-  })
+  });
 
 });
