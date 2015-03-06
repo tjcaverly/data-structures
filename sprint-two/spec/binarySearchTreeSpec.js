@@ -13,8 +13,8 @@ describe('binarySearchTree', function() {
 
   it('should insert values at the correct location in the tree', function(){
     binarySearchTree.insert(2);
-    binarySearchTree.insert(3);
     binarySearchTree.insert(7);
+    binarySearchTree.insert(3);
     binarySearchTree.insert(6);
     expect(binarySearchTree.left.right.value).to.equal(3);
     expect(binarySearchTree.right.left.value).to.equal(6);
@@ -32,8 +32,8 @@ describe('binarySearchTree', function() {
     var array = [];
     var func = function(value){ array.push(value); };
     binarySearchTree.insert(2);
-    binarySearchTree.insert(3);
     binarySearchTree.insert(6);
+    binarySearchTree.insert(3);
     binarySearchTree.depthFirstLog(func);
     expect(array).to.eql([5,2,3,6]);
   });
@@ -42,9 +42,28 @@ describe('binarySearchTree', function() {
     var array = [];
     var func = function(value){ array.push(value); };
     binarySearchTree.insert(2);
-    binarySearchTree.insert(3);
     binarySearchTree.insert(6);
+    binarySearchTree.insert(3);
     binarySearchTree.breadthFirstLog(func);
     expect(array).to.eql([5,2,6,3]);
+  });
+
+  it('should calculate the minimum depth', function(){
+    binarySearchTree.insert(2);
+    expect(binarySearchTree.getMinDepth()).to.equal(1);
+
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(7);
+    expect(binarySearchTree.getMinDepth()).to.equal(2);
+  });
+  
+  it('should balance a tree', function(){
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(8);
+    binarySearchTree.insert(9);
+    expect(binarySearchTree.value).to.equal(6);
+    expect(binarySearchTree.right.value).to.equal(7);
+    expect(binarySearchTree.left.value).to.equal(5);
   });
 });
