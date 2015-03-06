@@ -31,11 +31,9 @@ BinarySearchTree.prototype.insert = function(value){
 		}
 	};
 	recurseInsert(this);
-	//console.log("value: "+value+" count: " + count);
 	if (count > 2 * this.minDepthFloor) {
 		this.minDepthFloor = this.getMinDepth();
 		if (count > 2 * this.minDepthFloor) {
-			//console.log("autobalancing :" + value);
 			this.balance();
 		}
 	}
