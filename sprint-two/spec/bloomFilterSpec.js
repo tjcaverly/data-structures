@@ -19,7 +19,7 @@ describe('bloomFilter', function() {
   	expect(bloomFilter.contains(2)).to.equal(true);
   });
 
-  it('should calculate false positive rate', function() {
+  xit('should calculate false positive rate', function() {
   	var numFalsePositives = 0;
   	for (var i=0; i<10000; i++) {
   		bloomFilter = new BloomFilter();
@@ -34,7 +34,7 @@ describe('bloomFilter', function() {
   	// Predicted: 6.0916%, Actual: 6.94%
   });
 
-  it('should calculate false negative rate and find no false negatives', function() {
+  xit('should calculate false negative rate and find no false negatives', function() {
   	var numFalseNegatives = 10000;
   	for (var i=0; i<10000; i++) {
   		bloomFilter = new BloomFilter();
