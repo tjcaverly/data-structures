@@ -10,7 +10,15 @@ HashTable.prototype.insert = function(k, v){
   if (this._storage.get(i) === null || this._storage.get(i) === undefined){
   	this._storage.set(i, [[k,v]]);
   } else {
-  	this._storage.get(i).push([k,v]);
+    var bucket = this._storage.get(i);
+    for (var j = 0; j<bucket.length; j++){
+      if (bucket[j][0] === k){
+        bucket[j][1] = v;
+        return;
+      }
+    }
+    bucket.push([k,v]);
+
   }	
   this._filled++;
   if (this._filled >= .75 * this._limit) {
