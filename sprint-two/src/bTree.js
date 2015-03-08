@@ -20,6 +20,7 @@ BTree.prototype.insert = function(key){
 	} else {
 		this.insertNonFull(oldRoot, key);
 	}
+	debugger;
 };
 
 BTree.prototype.insertNonFull = function(currentNode, key) {
@@ -34,27 +35,29 @@ BTree.prototype.insertNonFull = function(currentNode, key) {
 		while (i >= 0 && key < currentNode.keys[i]){
 			i--;
 		}
-		var child_i = currentNode.children[i];
-		if (child_i.keys.length === this._order * 2 - 1){
-			this.splitChild(currentNode, i, child_i);
+		var child = currentNode.children[i+1];
+		if (child.keys.length === this._order * 2 - 1){
+			debugger;
+			this.splitChild(currentNode, i+1, child);
+			debugger;
 			if (key > currentNode.keys[i]){
 				i++;
 			}
 		}
-		this.insertNonFull(child_i, key);
+		this.insertNonFull(child, key);
 	}
 };
 
 BTree.prototype.splitChild = function(currentParent, index, currentNode){
 	var newNode = new BTreeNode(currentNode.leaf);
-	newNode.keys = currentNode.keys.slice(0, this._order);
-	currentNode.keys = currentNode.keys.slice(this._order);
+	newNode.keys = currentNode.keys.slice(this._order-1);
+	currentNode.keys = currentNode.keys.slice(0, this._order-1);
 	if (!currentNode.leaf) {
 		newNode.children = currentNode.children.slice(0, this._order);
 		currentNode.children = currentNode.children.slice(this._order);
 	}
 	currentParent.children.splice(index+1, 0, newNode);
-	currentParent.keys.splice(index, 0, currentNode.keys.shift());
+	currentParent.keys.splice(index+1, 0, newNode.keys.shift());
 
 };
 
@@ -67,8 +70,13 @@ BTree.prototype.contains = function(key){
 		if (i < node.keys.length && key === node.keys[i]){
 			return true;
 		}
+		if (node.leaf) {
+			return false;
+		} else {
+			return nodeContains(node.children[i]);
+		}
 	}
-	return nodeContains(this.root);
+	return nodeContains(this._root);
 };
 
 BTree.prototype.remove = function(value){
